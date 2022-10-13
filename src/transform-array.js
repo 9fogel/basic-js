@@ -25,38 +25,28 @@ function transform(arr) {
   if (!Array.isArray(arr)) {
     throw new Error("'arr' parameter must be an instance of the Array!");
   }
-  if (arr.every(isFinite)) {
-    newArr = [...arr]
+  if (!arr.includes('--double-next') && !arr.includes('--double-prev') && !arr.includes('--discard-next') && !arr.includes('--discard-prev')) {
+    newArr = [...arr];
     return newArr;
   }
   for (let i = 0; i < arr.length; i++) {
-    if (typeof(arr[i] === 'number') && !isNaN(arr[i]) && arr[i-1] !== '--discard-next') {
-          newArr.push(arr[i]);
-        } else if (arr[i] === '--discard-next') {
-          i++;
-        } else if (arr[i] === '--double-next' && arr[i + 1] !== undefined) {
-          newArr.push(arr[i + 1]);
-          newArr.push(arr[i + 1]);
-        } else if (arr[i] === '--double-prev' && arr[i - 1] !== undefined) {
-          newArr.push(arr[i - 1]);
-        } else if (arr[i] === '--discard-prev') {
-          newArr.pop();
-        } else if (typeof(arr[i] !== 'number');
+    if (arr[i] === '--discard-next') {
+      i += 2;
+    } else if (arr[i] === '--double-next' && arr[i + 1] !== undefined) {
+      newArr.push(arr[i + 1]);
+      newArr.push(arr[i + 1]);
+    } else if (arr[i] === '--double-next' && arr[i + 1] === undefined) {
+      continue;
+    } else if (arr[i] === '--double-prev' && arr[i - 1] !== undefined) {
+      newArr.push(arr[i - 1]);
+    } else if (arr[i] === '--double-prev' && arr[i - 1] === undefined) {
+      continue;
+    } else if (arr[i] === '--discard-prev') {
+      newArr.pop();
+    } else {
+      newArr.push(arr[i]);
     }
-  // arr.forEach ((elem, index, array) => {
-  //   if (isFinite(elem)) {
-  //     newArr.push(elem);
-  //   } else if (elem === '--discard-next') {
-  //     continue;
-  //   } else if (elem === '--double-next') {
-  //     newArr.push(elem * 2);
-  //   } else if (elem === '--double-prev') {
-  //     newArr.pop();
-  //     newArr.push(array[index - 1] * 2);
-  //   } else if (elem === '--discard-prev') {
-  //     newArr.pop();
-  //   }
-  // });
+  }
   return newArr;
 }
 
