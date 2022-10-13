@@ -22,51 +22,33 @@ try {
   if (date == undefined) {
         return 'Unable to determine the time of year!';
       }
+      if (date.hasOwnProperty('toString')) {
+        throw new Error('Invalid date!');
+      }
       if (date.getMonth) {
-            if (date.getMonth() === 11 || date.getMonth() === 0 || date.getMonth() === 1) {
-              return 'winter';
-            } else if (date.getMonth() === 2 || date.getMonth() === 3 || date.getMonth() === 4) {
-              return 'spring';
-            } else if (date.getMonth() === 5 || date.getMonth() === 6 || date.getMonth() === 7) {
-              return 'summer';
-            } else if (date.getMonth() === 8 || date.getMonth() === 9 || date.getMonth() === 10) {
-              return 'autumn';
-            }
-  } else {
-    throw new Error('Invalid date!');
-  }
-} catch (e) {
+          if (date.getMonth() === 11 || date.getMonth() === 0 || date.getMonth() === 1) {
+            return 'winter';
+          } else if (date.getMonth() === 2 || date.getMonth() === 3 || date.getMonth() === 4) {
+            return 'spring';
+          } else if (date.getMonth() === 5 || date.getMonth() === 6 || date.getMonth() === 7) {
+            return 'summer';
+          } else if (date.getMonth() === 8 || date.getMonth() === 9 || date.getMonth() === 10) {
+            return 'autumn';
+          }
+    } else {
+      throw new Error('Invalid date!');
+    }
+  } catch (e) {
   if (!date.hasOwnProperty('getMonth')) {
         throw new Error('Invalid date!');
-      } else if (!date.hasOwnProperty('getUTCFullYear')) {
+      } else if (!date.getUTCFullYear) {
         throw new Error('Invalid date!');
       }
       else {
         throw new Error('Invalid date!');
+      }
   }
 }
-}
-// function getSeason(date) {
-//   if (date == undefined) {
-//     return 'Unable to determine the time of year!';
-//   }
-//   if (date.getMonth) {
-//     if (date.getMonth() === 11 || date.getMonth() === 0 || date.getMonth() === 1) {
-//       return 'winter';
-//     } else if (date.getMonth() === 2 || date.getMonth() === 3 || date.getMonth() === 4) {
-//       return 'spring';
-//     } else if (date.getMonth() === 5 || date.getMonth() === 6 || date.getMonth() === 7) {
-//       return 'summer';
-//     } else if (date.getMonth() === 8 || date.getMonth() === 9 || date.getMonth() === 10) {
-//       return 'autumn';
-//     }
-//   } else if (!date.hasOwnProperty('getMonth')) {
-//     throw new Error('Invalid date!');
-//   } else {
-//     throw new Error('Invalid date!');
-//   }
-
-// }
 
 module.exports = {
   getSeason
