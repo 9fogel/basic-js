@@ -41,7 +41,7 @@ function transform(arr) {
           newArr.push(arr[i - 1]);
         } else if (arr[i] === '--discard-prev') {
           newArr.pop();
-        } else if (typeof(arr[i] !== 'number') continue;
+        } else if (typeof(arr[i] !== 'number');
     }
   // arr.forEach ((elem, index, array) => {
   //   if (isFinite(elem)) {
